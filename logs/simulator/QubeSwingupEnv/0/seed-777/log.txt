@@ -1,0 +1,2 @@
+Logging to logs/simulator/QubeSwingupEnv/0/seed-777
+Running trained model

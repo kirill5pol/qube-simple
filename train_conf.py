@@ -47,12 +47,12 @@ def train(env, num_timesteps, hardware, logdir, save, save_interval, load, seed)
     env = DummyVecEnv([make_env])
 
     set_global_seeds(seed)
-    policy = MlpLnLstmPolicy
+    policy = MlpPolicy
     model = PPO2(
         policy=policy,
         env=env,
         n_steps=2048,
-        nminibatches=1,
+        nminibatches=32,
         lam=0.95,
         gamma=0.99,
         noptepochs=10,
@@ -103,7 +103,7 @@ def main():
 
     device_type = "hardware" if args.use_hardware else "simulator"
     logdir = "{}/{}/{}/{}/seed-{}".format(
-        args.logdir, device_type, QubeSwingupEnv, args.num_timesteps, str(seed)
+        args.logdir, device_type, "QubeSwingupEnv", args.num_timesteps, str(seed)
     )
 
     logger.configure(logdir, args.output_formats)
